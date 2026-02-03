@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de aportes – Dependientes</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="container">
+<header class="encabezado">
+<h1>Calculadora de aportes – Dependientes</h1>
+<p class="lead">Conozca cuánto debe pagar mensualmente por Salud, Pensión, ARL y Caja de compensación según su salario y nivel de riesgo ARL.</p>
+<p class="note">Aplica solo para trabajadores dependientes</p>
+</header>
+
+<form id="form-aportes" class="form" novalidate>
+<div class="field">
+<label for="salario">Salario mensual</label>
+<input type="text" id="salario" name="salario" placeholder="1.750.905,00" required oninput="formatInputCOP(this)">
+<p id="min-info" class="helper">Salario mínimo vigente: 1.750.905 COP</p>
+</div>
+
+<div class="field">
+<label for="riesgo">Nivel de riesgo ARL</label>
+<select id="riesgo" name="riesgo" required>
+<option value="" selected>Seleccione</option>
+<option value="1">Riesgo 1</option>
+<option value="2">Riesgo 2</option>
+<option value="3">Riesgo 3</option>
+<option value="4">Riesgo 4</option>
+<option value="5">Riesgo 5</option>
+</select>
+</div>
+
+<button type="submit" id="btn-calcular" class="btn">Calcular aportes</button>
+</form>
+
+<div id="errores" class="errores" aria-live="polite"></div>
+
+<section id="resultados" class="resultados oculto">
+<h2>Resultados</h2>
+<div class="resultado-item"><span>Salud (4%)</span><strong id="v-salud"></strong></div>
+<div class="resultado-item"><span>Pensión (16%)</span><strong id="v-pension"></strong></div>
+<div class="resultado-item"><span>ARL</span><strong id="v-arl"></strong></div>
+<div class="resultado-item"><span>Caja de compensación (4%)</span><strong id="v-caja"></strong></div>
+<div class="resultado-item total"><span>Total a pagar</span><strong id="v-total"></strong></div>
+</section>
+<section class="mini-info">
+<h3>¿Qué es cada aporte?</h3>
+<div class="mini-item">Salud: Acceso a servicios médicos</div>
+<div class="mini-item">Pensión: Ahorro para jubilación</div>
+<div class="mini-item">ARL: Riesgos laborales</div>
+<div class="mini-item">Caja: Beneficios sociales</div>
+</section>
+<section class="video">
+<h3>¿Qué son los aportes y cómo se calculan?</h3>
+<p>Aprende qué significa cada aporte y cómo influye en tu salario</p>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/QEC6L4KWC_c?si=kba3EwEy67IVsx2H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</section>
+<p class="legal">Los cálculos son aproximados y no sustituyen la liquidación oficial de la planilla PILA.</p>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
