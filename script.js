@@ -1,21 +1,26 @@
 const SMMLV=1750905
 const RATES={salud:0.04,pension:0.16,caja:0.04,arl:{1:0.0052,2:0.0104,3:0.0244,4:0.0435,5:0.0696}}
-function formatCurrency(n){return n.toLocaleString('es-CO',{style:'currency',currency:'COP'})}
+function formatCurrency(n){
+const cents=Math.round((n-Math.floor(n))*100)
+const hasCents=cents!==0
+return n.toLocaleString('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:hasCents?2:0,maximumFractionDigits:hasCents?2:0})
+}
 function formatInputCOP(input){
 let valor=input.value.replace(/[^\d]/g,'')
 if(valor===''){input.value='';return}
-let numero=Number(valor)/100
-input.value=numero.toLocaleString('es-CO',{minimumFractionDigits:2,maximumFractionDigits:2})
+let numero=Number(valor)
+input.value=numero.toLocaleString('es-CO',{maximumFractionDigits:0})
 }
 function formatPasteCOP(e,input){
 e.preventDefault()
 const data=(e.clipboardData||window.clipboardData).getData('text')
 const digits=data.replace(/[^\d]/g,'')
 if(digits===''){input.value='';return}
-input.value=Number(digits).toLocaleString('es-CO',{minimumFractionDigits:2,maximumFractionDigits:2})
+const numero=Number(digits)
+input.value=numero.toLocaleString('es-CO',{maximumFractionDigits:0})
 }
 function parseCOP(valor){
-return Number(valor.replace(/\./g,'').replace(',','.'))
+return Number(valor.replace(/[^\d]/g,''))
 }
 document.addEventListener('DOMContentLoaded',function(){
 const form=document.getElementById('form-aportes')
